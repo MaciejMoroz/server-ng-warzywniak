@@ -1,0 +1,14 @@
+{
+  "cart": [
+    {
+      "_id": "5cdb138b5f42fc2e7c2ebc12",
+      "name": "papryka",
+      "price": 1,
+      "__v": 0
+    }
+  ],
+  "_id": "5cdb1048f4e2f30f38547791",
+  "userName": "Adam",
+  "payment": 0,
+  "__v": 0
+}

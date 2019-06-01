@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "name": "Adam",
+    "pass": 0
+  },
+  {
+    "id": 1,
+    "name": "Paweł",
+    "pass": 1
+  },
+  {
+    "id": 2,
+    "name": "Artur",
+    "pass": 2
+  },
+  {
+    "id": 3,
+    "name": "Asia",
+    "pass": 3
+  },
+  {
+    "id": 4,
+    "name": "Krystyna",
+    "pass": 4
+  }
+]

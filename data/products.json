@@ -1,0 +1,6 @@
+[
+  { "id": 0, "name": "papryka", "price": 1 },
+  { "id": 1, "name": "marchewka", "price": 1 },
+  { "id": 2, "name": "ziemniaki", "price": 1 },
+  { "id": 3, "name": "fasolka", "price": 2 }
+]
