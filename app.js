@@ -145,29 +145,31 @@ router.delete(
     let { userId, productId, quantity } = req.params;
     let product = await Product.findById(productId);
     let userCart = await Cart.findById(userId);
-    console.log("del?");
+
+    console.log(product, "tu");
+
     // remove all products
     if (!productId && !quantity) {
-      removeAllFromCart(userCart);
+      await removeAllFromCart(userCart);
       userCart = await Cart.findById(userId);
       console.log("removed all products");
 
-      res.send(userCart);
+      res.send(userCart.cart);
 
       // remove products  from cart by id
     } else if (!quantity) {
       console.log(`removed ${product}`);
-      removeProductFromCart(userCart, product);
+      await removeProductFromCart(userCart, product);
       userCart = await Cart.findById(userId);
-      res.send(userCart);
+      res.send(userCart.cart);
 
       // remove quantity of product
     } else {
-      removeQuantityOfProduct(userId, product, quantity);
+      await removeQuantityOfProduct(userId, product, quantity);
 
       userCart = await Cart.findById(userId);
 
-      res.send(userCart);
+      res.send(userCart.cart);
     }
   }
 );

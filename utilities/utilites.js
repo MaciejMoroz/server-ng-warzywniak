@@ -66,6 +66,8 @@ let removeAllFromCart = async userCart => {
 
 // remove product from cart by id
 let removeProductFromCart = async (userCart, product) => {
+  console.log(product);
+
   let id = String(product._id);
   return await userCart.update({ $pull: { cart: { _id: id } } });
 };
