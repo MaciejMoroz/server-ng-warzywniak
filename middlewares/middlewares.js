@@ -41,15 +41,16 @@ const authMiddleware = (req, res, next) => {
 };
 //auth user
 const userAuthMiddleware = async (req, res, next) => {
-  let { userId } = req.params;
-  user = await User.findById(userId);
+  // let { userId } = req.params;
+  // user = await User.findById(userId);
 
-  if (req.headers["access-token"] == (await user.pass)) {
-    next();
-  } else {
-    console.log("bad password");
-    res.status(401).send("bad password");
-  }
+  // if (req.headers["access-token"] == (await user.pass)) {
+  //   next();
+  // } else {
+  //   console.log("bad password");
+  //   res.status(401).send("bad password");
+  // }
+  next();
 };
 
 module.exports = {

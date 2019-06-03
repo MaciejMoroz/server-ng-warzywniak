@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
+const cors = require("cors");
+
 const middlewears = require("./middlewares/middlewares");
 const utilities = require("./utilities/utilites");
 
@@ -25,13 +27,7 @@ let {
   userAuthMiddleware
 } = middlewears;
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Access-Control-Allow-Headers", "access-token");
-
-  next();
-});
+app.use(cors());
 
 // router
 router.get("/", async (req, res) => {
@@ -150,6 +146,8 @@ router.delete(
 
     // remove all products
     if (!productId && !quantity) {
+      console.log(1);
+
       await removeAllFromCart(userCart);
       userCart = await Cart.findById(userId);
       console.log("removed all products");
@@ -158,6 +156,8 @@ router.delete(
 
       // remove products  from cart by id
     } else if (!quantity) {
+      console.log(2);
+
       console.log(`removed ${product}`);
       await removeProductFromCart(userCart, product);
       userCart = await Cart.findById(userId);
@@ -165,6 +165,8 @@ router.delete(
 
       // remove quantity of product
     } else {
+      console.log(3);
+
       await removeQuantityOfProduct(userId, product, quantity);
 
       userCart = await Cart.findById(userId);
