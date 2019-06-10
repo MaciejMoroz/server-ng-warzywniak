@@ -51,23 +51,28 @@ router.get("/products/:productId?", async (req, res) => {
   if (productId) {
     res.send(await Product.findById(productId));
   } else {
+    console.log(await Product.find());
     res.send(await Product.find());
   }
 });
 
 //add product
 router.put(
-  "/admin/add/:productName/:productPrice/",
+  "/admin/add/:productName/:productPrice/:photoUrl",
   authMiddleware,
   async (req, res) => {
-    let { productName, productPrice } = req.params;
+    let { productName, productPrice, photoUrl } = req.params;
     let isNameExist = await Product.findOne({ name: productName });
 
     if (isNameExist) {
       res.send(`produkt o podanej nazwie ${productName} już istnieje`);
       res.end();
     } else {
-      const product = new Product({ name: productName, price: productPrice });
+      const product = new Product({
+        name: productName,
+        img: photoUrl,
+        price: productPrice
+      });
       await product.save();
       res.send(await Product.find());
     }
@@ -109,6 +114,8 @@ router.get("/user/:userId", userAuthMiddleware, async (req, res) => {
 router.get("/cart/:userId", userAuthMiddleware, async (req, res) => {
   let { userId } = req.params;
   let userCart = await Cart.findById(userId);
+  console.log(userCart);
+
   res.send(await userCart.cart);
 });
 // shopping cart add
@@ -125,6 +132,7 @@ router.put(
       let userCart = await Cart.findById(userId);
       let bill = displayUserBill(userCart);
       let pay = calculatePayment(userCart);
+      console.log(userCart);
       // res.send(userCart + `${bill}  do zapłaty ${pay}zł `);
       res.send(userCart);
     } else {

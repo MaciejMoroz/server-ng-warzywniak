@@ -20,7 +20,8 @@ const User = mongoose.model("User", { name: String, pass: Number });
 //// product
 const Product = mongoose.model("Product", {
   name: { type: String, required: true },
-  price: { type: Number, required: false }
+  price: { type: Number, required: false },
+  img: { type: String, required: true }
 });
 
 //// product in cart
@@ -28,7 +29,8 @@ const ProductInCart = Product.discriminator(
   "ProductInCart",
   new mongoose.Schema({
     _id: String,
-    quantity: { type: Number }
+    quantity: { type: Number },
+    img: { type: String }
   })
 );
 
@@ -45,7 +47,8 @@ let addProductsToCart = async (userId, product, quantity) => {
     _id: product._id,
     name: product.name,
     price: product.price,
-    quantity: quantity
+    quantity: quantity,
+    img: product.img
   });
 
   if (isProductExistInCart.length !== 0) {
